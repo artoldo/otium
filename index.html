@@ -1,0 +1,163 @@
+<html>
+  <head>
+    <title>Otium & The City AR/VR - ARTOLDO (Sara Ferro & Chris Weil)</title>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" href="./images/icon.png" />
+    <script src="assets/engine.js"></script>
+    <script src="assets/physics.js"></script>
+    <script src="assets/extras.js"></script>
+    <script src="assets/ar.js"></script>
+    <script src="assets/sound.js"></script>
+    <script src="assets/audio.js"></script>
+    <script src="assets/gui.js"></script>
+    <script src="assets/particles.js"></script>
+    <script src="assets/shader.js"></script>
+
+
+<style>
+.a-dialog-allow-button {
+  background-color: white;
+  color: black;
+}
+
+.a-dialog-deny-button {
+  background-color: white;
+  color: black;
+}
+
+.a-dialog-ok-button {
+   background-color: white;
+   color: black;
+ }
+</style>
+
+ <script>
+      window.onload = () => {navigator.geolocation.getCurrentPosition((position) => {
+        document.querySelector('a-ocean').setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`)
+      });
+     }
+    </script>
+
+</head>
+
+
+  <body style="margin: 0; overflow: hidden;">
+
+<a-scene physics="debug: false" embedded arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;" loading-screen="dotsColor: white; backgroundColor: black" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: true" antialias="true">
+
+<!-- World -->
+
+<a-ocean look-at="[gps-camera]" color="cyan" width="5000" depth="5000" density="30" speed="5" position="0 -30 0"></a-ocean>
+
+<!-- Sound -->
+
+<audio id="music" src="assets/music.mp3" crossorigin="anonymous"></audio>
+
+<a-box material="opacity: 0.0; transparent: true" scale="200 20 200" position="0 -12 0" audio="src: #music; loop: true;"></a-box>
+
+
+<!-- Camera -->
+
+<a-entity id="rig" position="0 10 4" gps-camera rotation-reader  
+look-controls="pointerLockEnabled:true;" animation="property: position; to: 0 2 10;  easing: linear; dur: 5000">
+<a-entity id="camera" camera position="0 1.6 0" cursor-visible="true">
+
+                <a-gui-cursor id="cursor"
+						  raycaster="objects: [gui-interactable]"
+						  fuse="true" fuse-timeout="1000"
+						  color="white"
+						  hover-color="white"
+						  active-color="white"
+						  design="ring" >
+		</a-gui-cursor>
+
+</a-entity>
+</a-entity>
+
+
+
+
+<!-- Objects -->
+
+<a-torus-knot look-at="[gps-camera]" shader-frog="name:Goo_Shader" segments-width="144" segments-height="72" 
+color="navy" opacity="0.8" scale="2.5 2.5 2.5" position="0 4 0" rotation="0 0 0"
+animation="property: rotation; to: 360 -360 360;  easing: linear; loop:true; dur: 20000;"
+particle-system="preset: snow; particleCount: 15000; color:navy, bordeaux; rotationAxis:y; 
+positionSpread:0 1000 0; velocityValue: 0 5 0">
+</a-torus-knot>
+
+<a-torus-knot look-at="[gps-camera]" shader-frog="name:Goo_Shader" segments-width="72" segments-height="36" 
+color="navy" opacity="0.8" scale="1 1 1" position="6 4 0" rotation="0 0 0"
+animation="property: rotation; to: -360 360 360;  easing: linear; loop:true; dur: 30000;"
+particle-system="preset: snow; particleCount: 15000; color:navy, bordeaux; rotationAxis:y; 
+positionSpread:0 1000 0; velocityValue: 0 5 0">
+</a-torus-knot>
+
+<a-torus-knot look-at="[gps-camera]" shader-frog="name:Goo_Shader" segments-width="72" segments-height="36" 
+color="navy" opacity="0.8" scale="1 1 1" position="-6 4 0" rotation="0 0 0"
+animation="property: rotation; to: 360 360 -360;  easing: linear; loop:true; dur: 30000;"
+particle-system="preset: snow; particleCount: 15000; color:navy, bordeaux; rotationAxis:y; 
+positionSpread:0 1000 0; velocityValue: 0 5 0">
+</a-torus-knot>
+
+<a-entity position="0 4 0" rotation="0 0 0" 
+animation="property: rotation; to: -360 360 -360;  easing: linear; loop:true; dur: 20000;">
+
+<a-sphere look-at="[gps-camera]" shader-frog="name:Jelly_Shader"
+color="cyan" opacity="0.8" scale="0.5 0.5 0.5" position="-4 4 0" rotation="0 0 0"
+animation="property: position; to: 20 1 0;  loop: true; easing: linear; dur: 10500; dir: alternate;">
+</a-sphere>
+
+<a-sphere look-at="[gps-camera]" shader-frog="name:Jelly_Shader"
+color="cyan" opacity="0.8" scale="0.5 0.5 0.5" position="4 4 0" rotation="0 0 0"
+animation="property: position; to: 10 1 4;  loop: true; easing: linear; dur: 10500; dir: alternate;">
+</a-sphere>
+
+<a-sphere look-at="[gps-camera]" shader-frog="name:Jelly_Shader"
+color="cyan" opacity="0.8" scale="0.5 0.5 0.5" position="0 4 -4" rotation="0 0 0"
+animation="property: position; to: -10 1 8; loop: true; easing: linear; dur: 10500; dir: alternate;">
+</a-sphere>
+
+<a-sphere look-at="[gps-camera]" shader-frog="name:Jelly_Shader"
+color="cyan" opacity="0.8" scale="0.5 0.5 0.5" position="5 2 7" rotation="0 0 0"
+animation="property: position; to: 2 1 6; loop: true; easing: linear; dur: 10500; dir: alternate;">
+</a-sphere>
+
+<a-sphere look-at="[gps-camera]" shader-frog="name:Jelly_Shader"
+color="cyan" opacity="0.8" scale="0.5 0.5 0.5" position="-6 4 -9" rotation="0 0 0"
+animation="property: position; to: 20 1 0;  loop: true; easing: linear; dur: 10500; dir: alternate;">
+</a-sphere>
+
+<a-sphere look-at="[gps-camera]" shader-frog="name:Jelly_Shader"
+color="cyan" opacity="0.8" scale="0.5 0.5 0.5" position="-4 2 8" rotation="0 0 0"
+animation="property: position; to: 10 1 4;  loop: true; easing: linear; dur: 10500; dir: alternate;">
+</a-sphere>
+
+<a-sphere look-at="[gps-camera]" shader-frog="name:Jelly_Shader"
+color="cyan" opacity="0.8" scale="0.5 0.5 0.5" position="-7 3 -4" rotation="0 0 0"
+animation="property: position; to: -10 1 8; loop: true; easing: linear; dur: 10500; dir: alternate;">
+</a-sphere>
+
+<a-sphere look-at="[gps-camera]" shader-frog="name:Jelly_Shader"
+color="cyan" opacity="0.8" scale="0.5 0.5 0.5" position="9 6 3" rotation="0 0 0"
+animation="property: position; to: 2 1 6; loop: true; easing: linear; dur: 10500; dir: alternate;">
+</a-sphere>
+
+</a-entity>
+
+
+<!-- Floor -->
+
+<a-plane static-body id="Floor" material="opacity: 0.0; transparent: true" width="1000" height="1000" rotation="-90 0 0" position="0 0 0"></a-plane>
+ 
+</a-scene>
+
+  </body>
+</html>
+
+
+
+
+

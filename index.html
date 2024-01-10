@@ -8,7 +8,6 @@
     <script src="assets/engine.js"></script>
     <script src="assets/physics.js"></script>
     <script src="assets/extras.js"></script>
-    <script src="assets/ar.js"></script>
     <script src="assets/sound.js"></script>
     <script src="assets/audio.js"></script>
     <script src="assets/gui.js"></script>
@@ -33,12 +32,21 @@
  }
 </style>
 
- <script>
-      window.onload = () => {navigator.geolocation.getCurrentPosition((position) => {
-        document.querySelector('a-ocean').setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`)
-      });
-     }
-    </script>
+<script type="text/javascript">
+<!--
+if (screen.width <= 961) {
+document.location = "mobile.html";
+}
+//-->
+</script>
+
+<script language=javascript>
+<!--
+if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+   location.replace("mobile.html");
+}
+-->
+</script>
 
 </head>
 
@@ -156,8 +164,3 @@ animation="property: position; to: 2 1 6; loop: true; easing: linear; dur: 10500
 
   </body>
 </html>
-
-
-
-
-
